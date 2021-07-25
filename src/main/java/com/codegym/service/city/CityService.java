@@ -1,4 +1,4 @@
-package com.codegym.service.customer;
+package com.codegym.service.city;
 
 import com.codegym.model.City;
 import com.codegym.repository.ICityRepository;
@@ -11,7 +11,6 @@ import java.util.Optional;
 public class CityService implements ICityService {
     @Autowired
     private ICityRepository cityRepository;
-
 
     @Override
     public Iterable<City> findAll() {

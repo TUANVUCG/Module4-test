@@ -2,18 +2,18 @@ package com.codegym.controller;
 
 
 import com.codegym.model.City;
-import com.codegym.model.Country;
-import com.codegym.service.address.ICountryService;
-import com.codegym.service.customer.ICityService;
+import com.codegym.service.country.ICountryService;
+import com.codegym.service.city.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/cities")
 public class CityController {
 
@@ -23,20 +23,10 @@ public class CityController {
     @Autowired
     private ICountryService countryService;
 
-//    @ModelAttribute("countries")
-//    public Iterable<Country> countries() {
-//        return countryService.findAll();
-//    }
-
     @GetMapping
-    public ModelAndView showIndex() {
-        return new ModelAndView("index", "countries", countryService.findAll());
-    }
-
-
-    @GetMapping("/list")
-    public ResponseEntity<?> findAllCustomer() {
-        return new ResponseEntity<>(cityService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<City>> findAll() {
+        Iterable<City> cityIterable = cityService.findAll();
+        return new ResponseEntity<>(cityIterable, HttpStatus.OK);
     }
 
     @PostMapping
@@ -61,7 +51,7 @@ public class CityController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         city.setId(id);
-        return new ResponseEntity<>(cityService.save(city), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(cityService.save(city), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

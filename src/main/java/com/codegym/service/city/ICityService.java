@@ -1,4 +1,4 @@
-package com.codegym.service.customer;
+package com.codegym.service.city;
 
 import com.codegym.model.City;
 import com.codegym.service.IGeneralService;

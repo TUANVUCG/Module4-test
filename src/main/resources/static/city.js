@@ -16,10 +16,9 @@ function showAllCity() {
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Country</th>
-      <th scope="col">Area</th>
+      <th scope="col">Acreage</th>
       <th scope="col">Population</th>
       <th scope="col">GDP</th>
-      <th scope="col">Description</th>
       <th style="width: 250px;">Action</th>
     </tr>
   </thead>`;
@@ -38,7 +37,6 @@ function showCityList(city) {
       <td>${city.area}</td>
       <td>${city.population}</td>
       <td>${city.gdp}</td>
-      <td>${city.description}</td>
       <td>
       <button style="margin-right: 20px" onClick="edit(this.id)" id="${city.id}" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#edit">
                     Edit
@@ -90,6 +88,7 @@ function edit(id) {
         type: "get",
         url: "/cities/"+id,
         success: function (data){
+                $('#id-edit').val(data.id)
                 $('#name-edit').val(data.name)
                 $('#country-edit').val(data.country.name)
                 $('#area-edit').val(data.area)
@@ -97,6 +96,7 @@ function edit(id) {
                 $('#gdp-edit').val(data.gdp)
                 $('#description-edit').val(data.description)
                 $('#updateButton').click(function (event) {
+                    let id = $('#id-edit').val();
                     let name = $('#name-edit').val();
                     let country = $('#country-edit').val();
                     let area = $('#area-edit').val();
@@ -104,6 +104,7 @@ function edit(id) {
                     let gdp = $('#gdp-edit').val();
                     let description = $('#description-edit').val();
                     let updateCity = {
+                        id : id,
                         name: name,
                         country: {
                             id: country

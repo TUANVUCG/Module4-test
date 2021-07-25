@@ -1,4 +1,4 @@
-package com.codegym.service.address;
+package com.codegym.service.country;
 
 import com.codegym.model.Country;
 import com.codegym.repository.ICountryRepository;
